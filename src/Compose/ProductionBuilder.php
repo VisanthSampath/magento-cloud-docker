@@ -508,6 +508,12 @@ class ProductionBuilder implements BuilderInterface
                 [
                     'ports' => [$port ? "$port:3306" : '3306'],
                     'volumes' => $mounts,
+                    self::SERVICE_HEALTHCHECK => [
+                        'test'=> 'mysqladmin ping -u $$MYSQL_USER --password=$$MYSQL_PASSWORD',
+                        'interval'=> '30s',
+                        'timeout'=> '30s',
+                        'retries'=> 3
+                    ],
                 ]
             ),
             [self::NETWORK_MAGENTO],
