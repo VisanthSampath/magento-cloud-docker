@@ -224,13 +224,6 @@ class ProductionBuilder implements BuilderInterface
                     (string)$config->getServiceVersion($service),
                     self::SERVICE_ELASTICSEARCH === $service && !empty($esEnvVars)
                         ? ['environment' => $esEnvVars]
-                        : self::SERVICE_REDIS === $service
-                        ? [self::SERVICE_HEALTHCHECK => [
-                            'test'=> '["CMD-SHELL", "/redis-healthcheck.sh"]',
-                            'interval'=> '30s',
-                            'timeout'=> '30s',
-                            'retries'=> 3
-                        ] ]
                         : []
                 ),
                 [self::NETWORK_MAGENTO],
