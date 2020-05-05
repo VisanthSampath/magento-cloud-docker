@@ -109,7 +109,8 @@ class ServiceFactory
             'pattern' => self::PATTERN_VERSIONED
         ],
         ServiceInterface::SERVICE_RABBITMQ => [
-            'image' => 'rabbitmq',
+	        'image' => 'rabbitmq',
+	        'version' => '3-management',
             'pattern' => self::PATTERN_STD
         ],
         ServiceInterface::SERVICE_NODE => [

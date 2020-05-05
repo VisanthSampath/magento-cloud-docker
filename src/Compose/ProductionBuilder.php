@@ -238,6 +238,12 @@ class ProductionBuilder implements BuilderInterface
                             'timeout'=> '30s',
                             'retries'=> 3
                         ] ]
+                        : self::SERVICE_RABBITMQ === $service
+                        ? [self::SERVICE_HEALTHCHECK => [
+                            'test'=> 'rabbitmq-diagnostics -q node_health_check || exit 1',
+                            'timeout'=> '20s',
+                            'retries'=> 10
+                        ] ]
                         : []
                 ),
                 [self::NETWORK_MAGENTO],
